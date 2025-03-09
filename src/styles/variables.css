@@ -1,3 +1,9 @@
+@import url("./fonts/gambarino/css/gambarino.css");
+
 :root {
   --main-background-color: #d8d4c8;
+  --main-btn-background-color: #743600;
+  --main-text-color: #2d3142;
+  --gambarino-font: "Gambarino-Regular";
+  --kalam-font: "Kalam", cursive;
 }
