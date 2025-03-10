@@ -1,0 +1,44 @@
+h1 {
+  font-family: var(--gambarino-font);
+}
+
+textarea {
+  width: 80%;
+  background-color: var(--main-background-color);
+  background-image: linear-gradient(
+    var(--main-background-color) 96%,
+    rgba(0, 0, 0, 0.5) 90%
+  );
+  background-size: 100% 30px;
+  color: var(--main-text-color);
+  font-family: var(--kalam-font);
+  font-size: 20px;
+  line-height: 1.5;
+  border: none;
+  outline: none;
+  resize: none;
+  scrollbar-width: thin;
+  scrollbar-color: #bbb;
+}
+
+textarea::-webkit-scrollbar {
+  width: 5px;
+  margin-left: 10px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 5px;
+}
+
+.btn-save {
+  background-color: var(--main-btn-background-color);
+  width: 58px;
+  height: 52px;
+  border-radius: 10px;
+  border: none;
+}
+
+.alert {
+  background-color: var(--main-btn-background-color);
+}
