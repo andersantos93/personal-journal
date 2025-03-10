@@ -1,5 +1,11 @@
+.back-btn {
+  /* width: 100px;
+  height: 50px; */
+}
+
 h1 {
   font-family: var(--gambarino-font);
+  color: var(--main-text-color);
 }
 
 textarea {
