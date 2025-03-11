@@ -5,3 +5,22 @@
 body {
   background-color: var(--main-background-color);
 }
+
+.back-btn {
+  width: 30px;
+  background-color: var(--main-background-color);
+  border: none;
+}
+
+.back-btn img {
+  width: 30px;
+}
+
+.back-btn img:hover {
+  background-color: white;
+  border-radius: 100%;
+}
+
+.alert {
+  background-color: var(--main-btn-background-color);
+}
