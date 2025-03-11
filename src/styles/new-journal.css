@@ -1,5 +1,6 @@
 h1 {
   font-family: var(--gambarino-font);
+  color: var(--main-text-color);
 }
 
 textarea {
@@ -37,8 +38,4 @@ textarea::-webkit-scrollbar-thumb {
   height: 52px;
   border-radius: 10px;
   border: none;
-}
-
-.alert {
-  background-color: var(--main-btn-background-color);
 }

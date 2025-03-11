@@ -16,10 +16,10 @@ function App() {
     <AlertProvider>
       <BrowserRouter>
         <Routes>
-          <Route index element={<Home />} />
+          <Route path="/" index element={<Home />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="detais/:id" element={<Details />} />
+          <Route path="journal/:id" element={<Details />} />
           <Route path="new-journal" element={<NewJournal />} />
         </Routes>
       </BrowserRouter>

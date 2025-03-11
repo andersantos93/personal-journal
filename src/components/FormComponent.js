@@ -10,6 +10,7 @@ export default function FormComponent() {
   const [formData, setFormData] = useState({
     journal: "",
     date: formatDate(new Date()),
+    id: crypto.randomUUID(),
   });
 
   function handleChange(event) {
@@ -30,8 +31,16 @@ export default function FormComponent() {
       data.push(formData);
       localStorage.setItem("journals", JSON.stringify(data));
     }
-    setFormData({ journal: "", date: formatDate(new Date()) });
+    resetForm();
     showAlert("Journal entry has been added!");
+  }
+
+  function resetForm() {
+    setFormData({
+      journal: "",
+      date: formatDate(new Date()),
+      id: crypto.randomUUID(),
+    });
   }
 
   return (
