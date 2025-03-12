@@ -25,17 +25,8 @@ export default function Home() {
     setJournals(journalsByDate);
   }, []);
 
-  const truncateText = (text, limit = 50) =>
+  const truncateText = (text, limit = 300) =>
     text.length <= limit ? text : `${text.substring(0, limit)}...`;
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return {
-      day: date.getDate(),
-      month: date.toLocaleString("default", { month: "short" }),
-      weekday: date.toLocaleString("default", { weekday: "short" }),
-    };
-  };
 
   return (
     <div className="home-container">
@@ -52,14 +43,10 @@ export default function Home() {
       <main className="journal-list">
         {journals.length > 0 ? (
           journals.map(({ date, entries }) => {
-            const { day, month, weekday } = formatDate(date);
-
             return (
               <div key={date} className="date-group">
                 <div className="date-header">
-                  <span>
-                    {day} {month}, {weekday}
-                  </span>
+                  <span>{date}</span>
                 </div>
 
                 <div className="entries-container">
