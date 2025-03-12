@@ -2,7 +2,8 @@ import { useContext, useState } from "react";
 
 import { AlertContext } from "../context/AlertContext";
 import { formatDate } from "../utils/formatDate";
-import icon from "../assets/icons/pencil.png";
+
+import ButtonComponent from "./ButtonComponent";
 
 export default function FormComponent() {
   const { showAlert } = useContext(AlertContext);
@@ -53,9 +54,7 @@ export default function FormComponent() {
         required="required"
       ></textarea>
       <div className="d-flex justify-content-center">
-        <button type="submit" className="btn-save mt-3 mb-3">
-          <img src={icon} alt="save journal" />
-        </button>
+        <ButtonComponent type="submit" />
       </div>
     </form>
   );

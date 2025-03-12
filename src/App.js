@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Details from "./pages/Details";
 import Profile from "./pages/Profile";
 import NewJournal from "./pages/NewJournal";
+import NotFound from "./pages/NotFound";
 
 import { AlertProvider } from "./context/AlertContext";
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="profile" element={<Profile />} />
           <Route path="journal/:id" element={<Details />} />
           <Route path="new-journal" element={<NewJournal />} />
+          <Route path="*" name="not-found" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </AlertProvider>
