@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/sidebar.css";
+import homeIcon from "../assets/icons/home.png";
+import dashboardIcon from "../assets/icons/dashboard.png";
+import signoutIcon from "../assets/icons/signout.png";
 
 export default function Sidebar({ isOpen, onClose }) {
   const [user] = useState({
@@ -50,20 +53,18 @@ export default function Sidebar({ isOpen, onClose }) {
           <ul>
             <li>
               <Link to="/" onClick={onClose}>
-                <span className="icon">🏠</span>
+                <span className="icon">
+                  <img src={homeIcon}/>
+                </span>
                 <span>Home</span>
               </Link>
             </li>
             <li>
               <Link to="/dashboard" onClick={onClose}>
-                <span className="icon">⚡</span>
-                <span>Journal stats</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="/profile" onClick={onClose}>
-                <span className="icon">📅</span>
-                <span>Calendar</span>
+                <span className="icon">
+                  <img src={dashboardIcon}/>
+                </span>
+                <span>Dashboard</span>
               </Link>
             </li>
           </ul>
@@ -71,7 +72,9 @@ export default function Sidebar({ isOpen, onClose }) {
         
         <div className="sidebar-footer">
           <button className="sign-out" onClick={() => alert("Sign out functionality would go here")}>
-            <span className="icon">↪</span>
+            <span className="icon">
+              <img src={signoutIcon}/>
+            </span>
             <span>Sign out</span>
           </button>
         </div>
