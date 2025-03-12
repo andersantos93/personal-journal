@@ -32,6 +32,14 @@ export default function Home() {
     };
   };
 
+  const formatTime = (entry) => {
+    const timeValue = entry.timestamp || entry.createdAt || entry.date;
+    if (!timeValue) return '';
+    
+    const date = new Date(timeValue);
+    return date.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' });
+  };
+
   return (
     <div className="home-container">
       <header className="home-header">
@@ -54,7 +62,11 @@ export default function Home() {
                 <div className="entries-container">
                   {entries.map(entry => (
                     <Link to={`/journal/${entry.id}`} key={entry.id} className="journal-card">
-                      <p>{truncateText(entry.journal)}</p>
+                      <div className="journal-entry-line">
+                        <span className="journal-time">{formatTime(entry)}</span>
+                        <span className="journal-dash"> - </span>
+                        <span className="journal-text">{truncateText(entry.journal)}</span>
+                      </div>
                     </Link>
                   ))}
                 </div>
