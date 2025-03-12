@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/home.css";
+import Sidebar from "../components/Sidebar";
 
 export default function Home() {
   const [journals, setJournals] = useState([]);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   
   useEffect(() => {
     const storedJournals = JSON.parse(localStorage.getItem("journals")) || [];
@@ -35,10 +37,12 @@ export default function Home() {
   return (
     <div className="home-container">
       <header className="home-header">
-        <div className="menu-icon">☰</div>
+        <div className="menu-icon" onClick={() => setSidebarOpen(true)}>☰</div>
         <h1>Home</h1>
         <div></div>
       </header>
+
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       <main className="journal-list">
         {journals.length > 0 ? (
