@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import HeaderComponent from "../components/HeaderComponent";
 
 export default function Details() {
+  const navigate = useNavigate();
   const [journal, setJournal] = useState(null);
   let { id } = useParams();
 
@@ -13,9 +14,11 @@ export default function Details() {
       const journal = journals.find((journal) => journal.id === id);
       if (journal !== undefined) {
         setJournal(journal);
+      } else {
+        navigate("not-found");
       }
     }
-  }, [id]);
+  }, [id, navigate]);
 
   return (
     <>
