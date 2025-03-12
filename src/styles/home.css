@@ -13,7 +13,7 @@
   padding: 16px 0;
 }
 
-.menu-icon, .search-icon {
+.menu-icon {
   font-size: 24px;
   cursor: pointer;
 }
@@ -60,11 +60,13 @@
 .journal-card p {
   margin: 0;
   line-height: 1.5;
+  font-family: var(--kalam-font);
 }
 
 .no-entries {
   text-align: center;
   padding: 32px 0;
+  font-family: var(--kalam-font);
 }
 
 .add-journal-btn {

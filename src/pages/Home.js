@@ -37,9 +37,9 @@ export default function Home() {
       <header className="home-header">
         <div className="menu-icon">☰</div>
         <h1>Home</h1>
-        <div className="search-icon">🔍</div>
+        <div></div>
       </header>
-      
+
       <main className="journal-list">
         {journals.length > 0 ? (
           journals.map(({ date, entries }) => {
