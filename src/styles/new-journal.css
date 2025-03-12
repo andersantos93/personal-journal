@@ -32,7 +32,7 @@ textarea::-webkit-scrollbar-thumb {
   border-radius: 5px;
 }
 
-.btn-save {
+.btn-new-journal {
   background-color: var(--main-btn-background-color);
   width: 58px;
   height: 52px;

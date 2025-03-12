@@ -54,7 +54,7 @@ export default function FormComponent() {
         required="required"
       ></textarea>
       <div className="d-flex justify-content-center">
-        <ButtonComponent type="submit" />
+        <ButtonComponent type="submit" classes="btn-new-journal mt-3 mb-3" />
       </div>
     </form>
   );
