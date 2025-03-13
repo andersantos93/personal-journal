@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import homeIcon from "../assets/icons/home.png";
 import dashboardIcon from "../assets/icons/dashboard.png";
@@ -9,6 +9,7 @@ import profileIcon from "../assets/icons/user.png";
 import "../styles/sidebar.css";
 
 export default function Sidebar({ isOpen, onClose }) {
+  const navigate = useNavigate();
   const [user] = useState({
     name: "Jane Melwin",
     email: "janemelvin@gmail.com",
@@ -27,6 +28,13 @@ export default function Sidebar({ isOpen, onClose }) {
       document.body.style.overflow = "auto";
     };
   }, [isOpen]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    // closeProfile();
+    navigate("/login");
+  };
 
   return (
     <>
@@ -82,10 +90,7 @@ export default function Sidebar({ isOpen, onClose }) {
         </nav>
 
         <div className="sidebar-footer">
-          <button
-            className="sign-out"
-            onClick={() => alert("Sign out functionality would go here")}
-          >
+          <button className="sign-out" onClick={() => handleLogout()}>
             <span className="icon">
               <img src={signoutIcon} alt="Sign out icon" />
             </span>

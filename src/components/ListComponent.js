@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 export default function ListComponent({ journals }) {
-  const truncateText = (text, limit = 300) =>
+  const truncateText = (text, limit = 400) =>
     text.length <= limit ? text : `${text.substring(0, limit)}...`;
 
   return journals.map((journal, index) => {

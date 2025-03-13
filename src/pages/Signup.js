@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import "../styles/login.css";
 
 function Signup() {
   const [user, setUser] = useState({ fullName: "", email: "", password: "" });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [alert, setAlert] = useState(null);
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -20,48 +25,102 @@ function Signup() {
     }
 
     try {
+      setError(null);
+      setLoading(true);
       await axios.post("http://localhost:5000/signup", user);
-      navigate("/login");
+      setAlert(
+        "Registration complete! You will be redirected to the login page in 5 seconds."
+      );
+      setLoading(false);
+      setTimeout(() => {
+        navigate("/login");
+      }, 5000);
     } catch (error) {
-      console.error("Signup failed", error);
+      setLoading(false);
+      setError("Error to complete registration, please try again.");
     }
-  };
-
-  const handleLoginRedirect = () => {
-    navigate("/login");
   };
 
   return (
     <div className="login-container">
       <div className="login-form">
-        <h2>Signup</h2>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="fullName"
-            placeholder="Full Name"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={handleChange}
-            required
-          />
-          <button type="submit">Signup</button>
+        <h2 className="mb-5">Signup</h2>
+        <form
+          onSubmit={handleSubmit}
+          className="row justify-content-center m-3"
+        >
+          <div className="col-md-8">
+            <label htmlFor="fullName" className="form-label">
+              Full name
+            </label>
+            <input
+              type="text"
+              name="fullName"
+              id="fullName"
+              className="form-control"
+              placeholder="Enter your full name"
+              onChange={handleChange}
+              autoComplete="off"
+              required
+            />
+          </div>
+          <div className="col-md-8">
+            <label htmlFor="email" className="form-label">
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              className="form-control"
+              placeholder="Enter your email"
+              onChange={handleChange}
+              autoComplete="off"
+              required
+            />
+          </div>
+          <div className="col-md-8">
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              className="form-control"
+              placeholder="Enter your password"
+              onChange={handleChange}
+              autoComplete="off"
+              required
+            />
+          </div>
+          <div className="d-flex justify-content-center">
+            <button
+              type="submit"
+              className="col-12 col-md-8 mt-2 btn btn-primary"
+            >
+              Signup
+            </button>
+          </div>
         </form>
-        <button className="login-redirect" onClick={handleLoginRedirect}>
+        {loading && (
+          <div className="d-flex justify-content-center">
+            <span className="message">Loading...</span>
+          </div>
+        )}
+        {error && (
+          <div className="d-flex justify-content-center">
+            <span className="message">{error}</span>
+          </div>
+        )}
+        {alert && (
+          <div className="d-flex justify-content-center col-12 p-2 alert text-white">
+            <span>{alert}</span>
+          </div>
+        )}
+        <p className="signup text-center" onClick={() => navigate("/login")}>
           Go to Login
-        </button>
+        </p>
       </div>
     </div>
   );

@@ -4,39 +4,51 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #f5f5f0;
-  font-family: sans-serif;
-}
-
-.login-form {
-  width: 300px;
-  padding: 40px;
-  box-sizing: border-box;
+  background-color: var(--main-background-color);
 }
 
 .login-form h2 {
   text-align: center;
   margin-bottom: 30px;
-  color: #333;
+  font-size: 32px;
+}
+
+.login-form label,
+.login-form h2,
+.login-form input,
+.login-form button,
+.signup,
+.error-message {
+  color: var(--main-text-color);
+  font-family: var(--gambarino-font);
+}
+
+.login-form label {
+  font-size: 17px;
 }
 
 .login-form input {
-  width: 100%;
-  padding: 12px;
+  padding: 14px;
   margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  background-color: var(--main-background-color);
+  border: 2px solid var(--main-text-color);
+  border-radius: 10px;
   box-sizing: border-box;
   font-size: 16px;
 }
 
+.login-form input::placeholder {
+  color: var(--main-text-color);
+  font-family: var(--gambarino-font);
+  opacity: 0.4;
+}
+
 .login-form button {
-  width: 100%;
-  padding: 12px;
-  background-color: #333d51;
+  height: 55px;
+  background-color: var(--main-text-color);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 16px;
 }
@@ -45,40 +57,13 @@
   background-color: #2a3345;
 }
 
-.login-form .forgot-password {
-  width: 100%;
-  padding: 12px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 4px;
+.signup {
+  text-decoration: underline;
+  text-underline-offset: 4px;
   cursor: pointer;
+}
+
+.message {
   font-size: 16px;
-  margin-top: 10px;
-}
-
-.login-form .forgot-password:hover {
-  background-color: #45a049;
-}
-
-.error-message {
-  color: red;
-  font-size: 14px;
-  text-align: center;
   margin-bottom: 20px;
-}
-.login-form .login-redirect {
-  width: 100%;
-  padding: 12px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 10px;
-}
-
-.login-form .login-redirect:hover {
-  background-color: #45a049;
 }
