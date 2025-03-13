@@ -12,7 +12,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 
-import MainLayout from "./layouts/MainLayout";
+import PublicRoute from "./components/PublicRoute";
 import PrivateRoute from "./components/PrivateRoute";
 
 import { AlertProvider } from "./context/AlertContext";
@@ -22,32 +22,28 @@ function App() {
     <AlertProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="*" name="not-found" element={<NotFound />} />
-          <Route element={<MainLayout />}>
-            <Route
-              path="/"
-              index
-              element={<PrivateRoute element={<Home />} />}
-            />
-            <Route
-              path="dashboard"
-              element={<PrivateRoute element={<Dashboard />} />}
-            />
-            <Route
-              path="profile"
-              element={<PrivateRoute element={<Profile />} />}
-            />
-            <Route
-              path="journal/:id"
-              element={<PrivateRoute element={<Details />} />}
-            />
-            <Route
-              path="new-journal"
-              element={<PrivateRoute element={<NewJournal />} />}
-            />
+          <Route element={<PublicRoute />}>
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
           </Route>
+          <Route path="/" index element={<PrivateRoute element={<Home />} />} />
+          <Route
+            path="dashboard"
+            element={<PrivateRoute element={<Dashboard />} />}
+          />
+          <Route
+            path="profile"
+            element={<PrivateRoute element={<Profile />} />}
+          />
+          <Route
+            path="journal/:id"
+            element={<PrivateRoute element={<Details />} />}
+          />
+          <Route
+            path="new-journal"
+            element={<PrivateRoute element={<NewJournal />} />}
+          />
+          <Route path="*" name="not-found" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </AlertProvider>
