@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./styles/variables.css";
 import "./styles/global.css";
 
-import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Details from "./pages/Details";
 import Profile from "./pages/Profile";
@@ -26,9 +25,9 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
           </Route>
-          <Route path="/" index element={<PrivateRoute element={<Home />} />} />
           <Route
-            path="dashboard"
+            path="/"
+            index
             element={<PrivateRoute element={<Dashboard />} />}
           />
           <Route

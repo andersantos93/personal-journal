@@ -1,20 +1,30 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import homeIcon from "../assets/icons/home.png";
 import dashboardIcon from "../assets/icons/dashboard.png";
 import signoutIcon from "../assets/icons/signout.png";
 import profileIcon from "../assets/icons/user.png";
 
 import "../styles/sidebar.css";
+import avatar from "../assets/avatar.png";
 
 export default function Sidebar({ isOpen, onClose }) {
   const navigate = useNavigate();
-  const [user] = useState({
-    name: "Jane Melwin",
-    email: "janemelvin@gmail.com",
-    avatar: "https://i.pravatar.cc/100?img=5",
+  const [user, setUser] = useState({
+    name: "",
+    avatar: avatar,
   });
+
+  useEffect(() => {
+    const userAuthenticated = JSON.parse(localStorage.getItem("user"));
+    setUser({
+      name: userAuthenticated.fullName,
+      avatar:
+        userAuthenticated.profilePic !== ""
+          ? userAuthenticated.profilePic
+          : avatar,
+    });
+  }, []);
 
   // Prevent body scrolling when sidebar is open
   useEffect(() => {
@@ -32,7 +42,6 @@ export default function Sidebar({ isOpen, onClose }) {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    // closeProfile();
     navigate("/login");
   };
 
@@ -50,26 +59,18 @@ export default function Sidebar({ isOpen, onClose }) {
           <h2>Menu</h2>
         </div>
 
+        {}
         <div className="user-profile">
           <div className="avatar">
             <img src={user.avatar} alt={user.name} />
           </div>
           <div className="user-info">
             <h3>{user.name}</h3>
-            <p>{user.email}</p>
           </div>
         </div>
 
         <nav className="sidebar-nav">
           <ul>
-            <li>
-              <Link to="/" onClick={onClose}>
-                <span className="icon">
-                  <img src={homeIcon} alt="Home icon" />
-                </span>
-                <span>Home</span>
-              </Link>
-            </li>
             <li>
               <Link to="/profile" onClick={onClose}>
                 <span className="icon">
@@ -79,7 +80,7 @@ export default function Sidebar({ isOpen, onClose }) {
               </Link>
             </li>
             <li>
-              <Link to="/dashboard" onClick={onClose}>
+              <Link to="/" onClick={onClose}>
                 <span className="icon">
                   <img src={dashboardIcon} alt="Dashboard icon" />
                 </span>

@@ -30,7 +30,7 @@ function Profile() {
           <div className="d-flex w-100 justify-content-center">
             <div className="card" style={{ width: "18rem" }}>
               <img
-                src="https://i.pravatar.cc/100?img=5"
+                src="https://upload.wikimedia.org/wikipedia/commons/5/59/User-avatar.svg"
                 className="card-img-top align-self-center mt-4"
                 alt="Profile"
               />
