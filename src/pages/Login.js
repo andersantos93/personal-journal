@@ -27,7 +27,11 @@ function Login() {
       navigate("/");
     } catch (error) {
       setLoading(false);
-      setError("Invalid email or password. Please try again.");
+      if (error.status === 401) {
+        setError("Invalid email or password. Please try again.");
+      } else {
+        setError("Something went wrong on our end. Please try again later.");
+      }
     }
   };
 

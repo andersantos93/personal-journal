@@ -18,7 +18,7 @@
 .login-form input,
 .login-form button,
 .signup,
-.error-message {
+.message {
   color: var(--main-text-color);
   font-family: var(--gambarino-font);
 }

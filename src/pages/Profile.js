@@ -1,21 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import {
-  FaUser,
-  FaLock,
-  FaBell,
-  FaGlobe,
-  FaSignOutAlt,
-  FaPalette,
-  FaGift,
-  FaKey,
-} from "react-icons/fa";
+
+import HeaderComponent from "../components/HeaderComponent";
+
 import "../styles/profile.css";
 
-function Profile({ closeProfile }) {
+function Profile() {
   const [user, setUser] = useState({ fullName: "", email: "", profilePic: "" });
-  const [selectedImage, setSelectedImage] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,98 +19,42 @@ function Profile({ closeProfile }) {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    closeProfile();
     navigate("/login");
   };
 
-  const handleImageChange = async (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setSelectedImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-
-      const formData = new FormData();
-      formData.append("profilePic", file);
-      formData.append("email", user.email);
-
-      try {
-        const { data } = await axios.post(
-          "http://localhost:5000/upload",
-          formData,
-          {
-            headers: { "Content-Type": "multipart/form-data" },
-          }
-        );
-
-        if (data.url) {
-          const updatedUser = {
-            ...user,
-            profilePic: `http://localhost:5000${data.url}`,
-          };
-          setUser(updatedUser);
-          localStorage.setItem("user", JSON.stringify(updatedUser));
-        }
-      } catch (error) {
-        console.error("Image upload failed", error);
-      }
-    }
-  };
-
   return (
-    <div className="profile-container">
-      <h2>Profile</h2>
-      <div className="profile-header">
-        <label htmlFor="profilePic">
-          <img
-            src={selectedImage || user.profilePic || "default-avatar.png"}
-            alt="Profile"
-            className="profile-pic"
-          />
-        </label>
-        <input
-          type="file"
-          id="profilePic"
-          accept="image/*"
-          onChange={handleImageChange}
-          hidden
-        />
-        <div>
-          <h3>{user.fullName}</h3>
-          <p>{user.email}</p>
-        </div>
-      </div>
-
-      <ul className="profile-options">
-        <li>
-          <FaUser /> Account settings
-        </li>
-        <li>
-          <FaLock /> Security
-        </li>
-        <li>
-          <FaGlobe /> Change language
-        </li>
-        <li>
-          <FaBell /> Notifications
-        </li>
-        <li>
-          <FaPalette /> Change theme
-        </li>
-        <li>
-          <FaGift /> Refer friends
-        </li>
-        <li>
-          <FaKey /> Privacy policy
-        </li>
-      </ul>
-
-      <button className="logout-btn" onClick={handleLogout}>
-        <FaSignOutAlt /> Logout
-      </button>
-    </div>
+    <>
+      {user && (
+        <>
+          <HeaderComponent page="/" header="Profile" />
+          <div className="d-flex w-100 justify-content-center">
+            <div className="card" style={{ width: "18rem" }}>
+              <img
+                src="https://i.pravatar.cc/100?img=5"
+                className="card-img-top align-self-center mt-4"
+                alt="Profile"
+              />
+              <div className="card-body text-center">
+                <div className="d-block">
+                  <span>{user.fullName}</span>
+                </div>
+                <div className="d-block">
+                  <span>{user.email}</span>
+                </div>
+                <div className="d-block">
+                  <p
+                    className="text-center mt-2"
+                    onClick={() => handleLogout()}
+                  >
+                    Sign out
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+    </>
   );
 }
 

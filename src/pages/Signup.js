@@ -37,7 +37,11 @@ function Signup() {
       }, 5000);
     } catch (error) {
       setLoading(false);
-      setError("Error to complete registration, please try again.");
+      if (error.status === 400) {
+        setError("User already exists, please enter another email.");
+      } else {
+        setError("Error to complete registration, please try again.");
+      }
     }
   };
 
