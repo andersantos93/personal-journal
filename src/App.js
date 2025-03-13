@@ -8,7 +8,12 @@ import Dashboard from "./pages/Dashboard";
 import Details from "./pages/Details";
 import Profile from "./pages/Profile";
 import NewJournal from "./pages/NewJournal";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+
+import MainLayout from "./layouts/MainLayout";
+import PrivateRoute from "./components/PrivateRoute";
 
 import { AlertProvider } from "./context/AlertContext";
 
@@ -17,12 +22,32 @@ function App() {
     <AlertProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" index element={<Home />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="journal/:id" element={<Details />} />
-          <Route path="new-journal" element={<NewJournal />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
           <Route path="*" name="not-found" element={<NotFound />} />
+          <Route element={<MainLayout />}>
+            <Route
+              path="/"
+              index
+              element={<PrivateRoute element={<Home />} />}
+            />
+            <Route
+              path="dashboard"
+              element={<PrivateRoute element={<Dashboard />} />}
+            />
+            <Route
+              path="profile"
+              element={<PrivateRoute element={<Profile />} />}
+            />
+            <Route
+              path="journal/:id"
+              element={<PrivateRoute element={<Details />} />}
+            />
+            <Route
+              path="new-journal"
+              element={<PrivateRoute element={<NewJournal />} />}
+            />
+          </Route>
         </Routes>
       </BrowserRouter>
     </AlertProvider>

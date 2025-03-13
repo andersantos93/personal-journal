@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Sidebar from "../components/Sidebar";
 import ButtonComponent from "../components/ButtonComponent";
@@ -8,8 +8,16 @@ import "../styles/home.css";
 import ListComponent from "../components/ListComponent";
 
 export default function Home() {
+  const navigate = useNavigate();
   const [journals, setJournals] = useState([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     const storedJournals = JSON.parse(localStorage.getItem("journals")) || [];
