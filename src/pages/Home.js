@@ -20,7 +20,8 @@ export default function Home() {
   }, [navigate]);
 
   useEffect(() => {
-    const storedJournals = JSON.parse(localStorage.getItem("journals")) || [];
+    const storedJournals =
+      JSON.parse(localStorage.getItem("journals")).reverse() || [];
     setJournals(storedJournals);
   }, []);
 

@@ -6,21 +6,17 @@ export default function ListComponent({ journals }) {
 
   return journals.map((journal, index) => {
     return (
-      <div key={index} className="date-group">
-        <div className="date-header">
-          <span>{journal.date}</span>
-        </div>
+      <Link to={`/journal/${journal.id}`} key={index} className="journal-card">
+        <div key={index} className="date-group">
+          <div className="date-header">
+            <span>{journal.date}</span>
+          </div>
 
-        <div className="entries-container">
-          <Link
-            to={`/journal/${journal.id}`}
-            key={index}
-            className="journal-card"
-          >
+          <div className="entries-container">
             <p>{truncateText(journal.journal)}</p>
-          </Link>
+          </div>
         </div>
-      </div>
+      </Link>
     );
   });
 }
