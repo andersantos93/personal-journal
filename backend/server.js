@@ -23,14 +23,22 @@ app.post("/signup", (req, res) => {
   if (users.find((u) => u.email === email)) {
     return res.status(400).json({ error: "User already exists" });
   }
-  const newUser = { fullName, email, password, profilePic: "" };
+  const newUser = {
+    fullName,
+    email,
+    password,
+    profilePic: "",
+    id: crypto.randomUUID(),
+  };
   users.push(newUser);
   res.json({ message: "User registered" });
 });
 
 // Login route
 app.post("/login", (req, res) => {
-  const user = users.find((u) => u.email === req.body.email && u.password === req.body.password);
+  const user = users.find(
+    (u) => u.email === req.body.email && u.password === req.body.password
+  );
   if (user) {
     res.json({ token: "fake-jwt-token", user });
   } else {
@@ -52,6 +60,6 @@ app.post("/upload", upload.single("profilePic"), (req, res) => {
   }
 });
 
-app.use("/uploads", express.static("uploads")); 
+app.use("/uploads", express.static("uploads"));
 
 app.listen(5000, () => console.log("Server running on port 5000"));

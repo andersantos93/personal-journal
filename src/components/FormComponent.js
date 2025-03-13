@@ -22,14 +22,17 @@ export default function FormComponent() {
   function handleSubmit(event) {
     event.preventDefault();
     const journals = JSON.parse(localStorage.getItem("journals")) || [];
+    const userId = JSON.parse(localStorage.getItem("user"));
+    const journalData = formData;
+    journalData.userId = userId.id;
     if (journals.length === 0) {
-      localStorage.setItem("journals", JSON.stringify([formData]));
+      localStorage.setItem("journals", JSON.stringify([journalData]));
     } else {
       let data = [];
       for (let journal of journals) {
         data.push(journal);
       }
-      data.push(formData);
+      data.unshift(journalData);
       localStorage.setItem("journals", JSON.stringify(data));
     }
     resetForm();

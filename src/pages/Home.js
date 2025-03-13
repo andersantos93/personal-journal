@@ -20,9 +20,14 @@ export default function Home() {
   }, [navigate]);
 
   useEffect(() => {
-    const storedJournals =
-      JSON.parse(localStorage.getItem("journals")).reverse() || [];
-    setJournals(storedJournals);
+    const storedJournals = JSON.parse(localStorage.getItem("journals")) || [];
+    const userId = JSON.parse(localStorage.getItem("user"));
+
+    const journalsByUser = storedJournals.filter(
+      (journal) => journal.userId === userId.id
+    );
+
+    setJournals(journalsByUser);
   }, []);
 
   return (
@@ -50,12 +55,14 @@ export default function Home() {
         )}
       </main>
 
-      <Link to="new-journal">
-        <ButtonComponent
-          type="button"
-          classes="btn-new-journal position-fixed bottom-0 end-0 m-4"
-        />
-      </Link>
+      {journals.length > 0 && (
+        <Link to="new-journal">
+          <ButtonComponent
+            type="button"
+            classes="btn-new-journal position-fixed bottom-0 end-0 m-4"
+          />
+        </Link>
+      )}
     </div>
   );
 }
